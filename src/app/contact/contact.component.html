@@ -1,0 +1,102 @@
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+
+  <label> Name: </label>
+  <input type = "text" formControlName="name">
+  <div *ngIf="(submitted ||f.name.dirty || f.name.touched) && f.name.errors">
+    <div *ngIf="f.name.errors.required">Name is required.</div>
+    <div *ngIf="f.name.errors.pattern">Text only</div>
+  </div>
+
+    <label> Surname: </label>
+      <input type = "text" formControlName="surname">
+      <div *ngIf="(submitted || f.surname.dirty || f.surname.touched) && f.surname.errors">
+        <div *ngIf="f.surname.errors.required">Surname is required.</div>
+        <div *ngIf="f.surname.errors.pattern">Text only</div>
+      </div>
+
+  <div>
+    <label> Email: </label>
+      <input type = "text" formControlName="email" >
+    <div *ngIf="(submitted || f.email.touched) && f.email.errors">
+      <div *ngIf="f.email.errors.required">Email is required</div>
+      <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+  </div>
+
+    <label> Phone: </label>
+      <input formControlName="phone">
+      <div *ngIf="(f.phone.dirty || f.phone.touched) && f.phone.invalid">
+    Value has to be a number.
+    </div>
+
+  <div>
+    <label> Password: </label>
+      <input type = "text" formControlName="password">
+      <div *ngIf="(submitted || f.password.touched) && f.password.errors">
+        <div *ngIf="f.password.invalid">Password is invalid</div>
+        <div *ngIf="f.password.errors.minLength">Password must be at least 8 characters</div>
+      </div>
+  </div>
+
+  <label> Confirm Password: </label>
+    <input type = "text" formControlName="confirmPassword" pattern="{{ f.password.value }}">
+    <div *ngIf="(submitted || f.confirmPassword.dirty || f.confirmPassword.touched) && f.confirmPassword.errors">
+      <div *ngIf="f.confirmPassword.errors.pattern">Password doesn't match</div>
+    </div>
+    <label> Pet: </label>
+  <tr *ngFor="let pet of pets">
+    <td>
+      <input type="radio" formControlName="pet"
+             [value]="pet">{{pet}}
+    </td>
+  </tr>
+  <div *ngIf=" (submitted || f.pet.dirty || f.pet.touched) && f.pet.invalid && f.pet.errors.required">
+    Pet is required.
+  </div>
+
+  <h3>Address</h3>
+
+    <label> City: </label>
+      <input type = "text" formControlName="city">
+      <div *ngIf="(submitted || f.city.dirty || f.city.touched) && f.city.invalid && f.city.errors.required">
+        City is required.
+      </div>
+
+    <label> Street: </label>
+      <input type = "text" formControlName="street">
+      <div *ngIf="(submitted || f.street.dirty || f.street.touched) && f.street.invalid && f.street.errors.required">
+        Street is required.
+      </div>
+
+    <label> Building: </label>
+      <input type = "text" formControlName="building">
+      <div *ngIf="(submitted || f.building.dirty || f.building.touched) && f.building.errors">
+        <div *ngIf="f.building.errors.required">Building number is required.</div>
+        <div *ngIf="f.building.errors.pattern">Numbers only</div>
+      </div>
+
+    <label> FlatNo: </label>
+      <input type = "text" formControlName="flatNo">
+
+
+    <label> Newsletter </label>
+    <input type = "checkbox" formControlName="newsletter">
+    <div *ngIf="(submitted || f.newsletter.dirty || f.newsletter.touched) && f.newsletter.invalid && f.newsletter.errors.required">
+      Newsletter is required.
+    </div>
+
+  <div *ngIf="(f.phone.valid && f.phone.touched)">
+    <label> SMS </label>
+    <input type = "checkbox" formControlName="sms">
+  </div>
+
+  <br><br>
+  <button type="submit" >Save</button>
+  <button type="reset" (click)="revert()" [disabled]="contactForm.pristine">Revert</button>
+</form>
+
+<p>Form value: {{ contactForm.value | json }}</p>
+
+<p>
+  Form Status: {{ contactForm.status }}
+</p>

@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+}
+
+label {
+  display: block;
+  width: 6em;
+  margin: .5em 0;
+  color: #607D8B;
+  font-weight: bold;
+}
+
+input {
+  height: 1em;
+  font-size: 1em;
+  padding-left: .4em;
+}
+
+
+.ng-valid,
+.ng-valid.required {
+  background-color: lightgreen;
+}
+
+.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+
+.ng-pristine {
+  background-color: white;
+}
+
+input.submitted.ng-invalid
+{
+  border:1px solid #f00;
+}
+
+input.submitted.ng-pristine
+{
+  border:1px solid #f00;
+}
+
+
